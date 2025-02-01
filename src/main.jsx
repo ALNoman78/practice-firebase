@@ -10,6 +10,7 @@ import Layout from './componentes/Layout/Layout';
 import Home from './componentes/Home/Home';
 import SignIn from './componentes/SignIn/SignIn';
 import SignUp from './componentes/SignUp/SignUp';
+import Test from './componentes/Test/Test'
 // import { Helmet } from 'react-helmet';
 
 const router = createBrowserRouter([
@@ -24,7 +25,7 @@ const router = createBrowserRouter([
       },
       {
         path : '/about',
-        element : <div>About</div>
+        element : <Test></Test>
       },
       {
         path : '/signin',
