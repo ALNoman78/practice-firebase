@@ -8,6 +8,8 @@ import {
 import "./index.css";
 import Layout from './componentes/Layout/Layout';
 import Home from './componentes/Home/Home';
+import SignIn from './componentes/SignIn/SignIn';
+import SignUp from './componentes/SignUp/SignUp';
 // import { Helmet } from 'react-helmet';
 
 const router = createBrowserRouter([
@@ -19,6 +21,18 @@ const router = createBrowserRouter([
       {
         path : '/',
         element : <Home></Home>
+      },
+      {
+        path : '/about',
+        element : <div>About</div>
+      },
+      {
+        path : '/signin',
+        element : <SignIn></SignIn>
+      },
+      {
+        path : '/signup',
+        element : <SignUp></SignUp>
       }
     ]
   },

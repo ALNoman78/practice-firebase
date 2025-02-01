@@ -1,4 +1,11 @@
+import { Link, NavLink } from "react-router-dom"
+
 const Navbar = () => {
+    const list = <>
+        <li><NavLink to='/'>Home</NavLink></li>
+        <li><NavLink to='/about'>About</NavLink></li>
+        <li><NavLink to='/portfolio'>Portfolio</NavLink></li>
+    </>
     return (
         <div className="navbar bg-base-100 shadow-sm">
             <div className="navbar-start">
@@ -8,37 +15,25 @@ const Navbar = () => {
                     </div>
                     <ul
                         tabIndex={0}
-                        class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
-                        <li><a>Item 1</a></li>
-                        <li>
-                            <a>Parent</a>
-                            <ul className="p-2">
-                                <li><a>Submenu 1</a></li>
-                                <li><a>Submenu 2</a></li>
-                            </ul>
-                        </li>
-                        <li><a>Item 3</a></li>
+                        className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
+
+                        {
+                            list
+                        }
                     </ul>
                 </div>
                 <a className="btn btn-ghost text-xl">daisyUI</a>
             </div>
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1">
-                    <li><a>Item 1</a></li>
-                    <li>
-                        <details>
-                            <summary>Parent</summary>
-                            <ul className="p-2">
-                                <li><a>Submenu 1</a></li>
-                                <li><a>Submenu 2</a></li>
-                            </ul>
-                        </details>
-                    </li>
-                    <li><a>Item 3</a></li>
+                    {
+                        list
+                    }
                 </ul>
             </div>
             <div className="navbar-end">
-                <a className="btn">Button</a>
+                <Link className="btn" to='/signup'>Sign Up</Link>
+                <Link className="btn"  to='/signin'>Sign In</Link>
             </div>
         </div>
     )
