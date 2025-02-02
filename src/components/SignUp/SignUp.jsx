@@ -2,7 +2,6 @@ import { createUserWithEmailAndPassword, sendEmailVerification, updateProfile } 
 import auth from "../../firebase/firebase.init";
 import { useState } from 'react';
 import { Eye, EyeOff } from 'lucide-react';
-import { h3 } from "framer-motion/client";
 
 const SignUp = () => {
 
@@ -18,9 +17,8 @@ const SignUp = () => {
         const username = e.target.username.value;
         const password = e.target.password.value;
         const email = e.target.email.value;
-        const photoURL = e.target.photoURL.value;
+        const image = e.target.imageLink.value;
 
-        console.log(username, password, email, photoURL, "Moule")
         setError('')
         setSuccess(false)
 
@@ -35,19 +33,21 @@ const SignUp = () => {
                     .catch(error => console.log(error.message))
                 // setUser()
             })
+
+        // user photo and name set
+        const profile = {
+            displayName: username,
+            photoURL: image,
+        }
+        // profile will be updated here
+        updateProfile(auth.currentUser, profile)
+            .then(() => console.log('update profile'))
+            .catch(() => console.log('user set error found'))
+
             .catch(error => {
                 setError(error.message)
                 setSuccess(false)
             })
-            // user photo and name set
-        const profile = {
-            name: username,
-            photoURL: photoURL,
-        }
-        // profile will be updated here
-        updateProfile(auth.currentUser, profile)
-            .then(res => console.log('update profile'))
-            .catch(error => console.log('user set error found'))
     }
     return (
         <div>
@@ -60,7 +60,7 @@ const SignUp = () => {
                 <p className="fieldset-label">Photo Link</p>
                 <label className="input w-full">
                     <span className="label">https://</span>
-                    <input type="text" className="w-full" placeholder="URL" name="photoURL" required />
+                    <input type="text" className="w-full" placeholder="URL" name="imageLink" required />
                 </label>
 
                 <label className="fieldset-label">Email</label>
@@ -68,10 +68,6 @@ const SignUp = () => {
 
                 <label className="fieldset-label">Password</label>
                 {/* single password */}
-
-                <label htmlFor='pass' className='text-sm font-normal'>
-                    Password
-                </label>
                 <div className='relative mt-1'>
                     <input
                         type={isVisible ? 'text' : 'password'}
@@ -90,7 +86,7 @@ const SignUp = () => {
                 {/* modal start */}
                 <dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle">
                     <div className="modal-box justify-center">
-                    {
+                        {
                             error && <h3 className="font-bold text-lg">{error}</h3>
                         }
                         {

@@ -3,7 +3,7 @@ import { useRef, useState } from "react";
 import auth from "../../firebase/firebase.init";
 
 const SignIn = () => {
-    const emailRef = useRef(null)
+    const emailRef = useRef('')
     const [success, setSuccess] = useState(false)
     const [user, setUser] = useState('')
     const [error, setError] = useState('')
@@ -12,35 +12,34 @@ const SignIn = () => {
         e.preventDefault();
         const email = e.target.email.value;
         const password = e.target.password.value;
-        console.log(email, password)
 
         setSuccess(false)
         setError('')
 
         signInWithEmailAndPassword(auth, email, password)
             .then(result => {
-                console.log(result.user)
                 setUser(result.user)
                 setSuccess(true)
+                console.log(result.user)
             })
             .catch(error => {
-                console.log(error.message)
                 setError(error.message)
                 setSuccess(false)
             })
     }
 
-    const handleRestPassword = () => {
-        console.log('Forget password')
+    const handleForgetPassword = () => {
+        console.log('forget password')
         const email = emailRef.current.value;
-        // rest password formula
+        console.log(email)
 
         if (!email) {
-            console.log('Verified email sent')
-        }
-        else{
-            sendPasswordResetEmail(auth , email)
-            .then(() => alert('Verification email sent'))
+            console.log('Use verified email address')
+        } else {
+            sendPasswordResetEmail(auth, email)
+            .then(() => {
+                alert('Password reset email sent , please check your email ')
+            })
         }
     }
 
@@ -48,8 +47,12 @@ const SignIn = () => {
         <div className="hero bg-base-200 min-h-screen">
             <div className="hero-content flex-col lg:flex-row-reverse">
                 <div className="text-center lg:text-left">
+
                     {
-                        user && <h1 className="text-5xl font-bold">{user.displayName}</h1>
+                        user && <div>
+                            <h1 className="text-5xl font-bold">{user.displayName}</h1>
+                            <img src={user.photoURL} className="w-16 h-16 rounded-full object-cover" alt="" />
+                        </div>
                     }
                     <p className="py-6">
                         Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem
@@ -60,10 +63,10 @@ const SignIn = () => {
                     <div className="card-body">
                         <form onSubmit={handleSignIn} className="fieldset">
                             <label className="fieldset-label">Email</label>
-                            <input type="email" className="input" name="email" placeholder="Email" required />
+                            <input type="email" className="input" name="email" ref={emailRef} placeholder="Email" required />
                             <label className="fieldset-label">Password</label>
-                            <input type="password" className="input" ref={emailRef} name="password" placeholder="Password" required />
-                            <div><a className="link link-hover" onClick={handleRestPassword}>Forgot password?</a></div>
+                            <input type="password" className="input"  name="password" placeholder="Password" required />
+                            <div><a className="link link-hover" onClick={handleForgetPassword}>Forgot password?</a></div>
                             <button className="btn btn-neutral mt-4">Login</button>
                         </form>
                         {
