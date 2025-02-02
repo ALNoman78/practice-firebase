@@ -29,6 +29,7 @@ const SignUp = () => {
             .then(result => {
                 console.log(result.user)
                 setSuccess(true)
+                // send email verification
                 sendEmailVerification(auth.currentUser)
                     .then(res => console.log(res, 'Moule love you'))
                     .catch(error => console.log(error.message))
@@ -38,12 +39,12 @@ const SignUp = () => {
                 setError(error.message)
                 setSuccess(false)
             })
-
+            // user photo and name set
         const profile = {
             name: username,
             photoURL: photoURL,
         }
-
+        // profile will be updated here
         updateProfile(auth.currentUser, profile)
             .then(res => console.log('update profile'))
             .catch(error => console.log('user set error found'))

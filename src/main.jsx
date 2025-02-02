@@ -6,11 +6,10 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import "./index.css";
-import Layout from './componentes/Layout/Layout';
-import Home from './componentes/Home/Home';
-import SignIn from './componentes/SignIn/SignIn';
-import SignUp from './componentes/SignUp/SignUp';
-import Test from './componentes/Test/Test'
+import Layout from './components/Layout/Layout';
+import Home from './components/Home/Home';
+import SignIn from './components/SignIn/SignIn';
+import SignUp from './components/SignUp/SignUp';
 // import { Helmet } from 'react-helmet';
 
 const router = createBrowserRouter([
@@ -25,7 +24,7 @@ const router = createBrowserRouter([
       },
       {
         path : '/about',
-        element : <Test></Test>
+        element : <div>About</div>
       },
       {
         path : '/signin',
