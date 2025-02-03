@@ -47,7 +47,7 @@ const SignIn = () => {
         <div className="hero bg-base-200 min-h-screen">
             <div className="hero-content flex-col lg:flex-row-reverse">
                 <div className="text-center lg:text-left">
-
+                {/* user profile and photo is there */}
                     {
                         user && <div>
                             <h1 className="text-5xl font-bold">{user.displayName}</h1>
